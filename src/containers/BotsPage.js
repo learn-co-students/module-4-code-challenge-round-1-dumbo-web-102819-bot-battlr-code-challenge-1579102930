@@ -21,12 +21,18 @@ class BotsPage extends React.Component {
   handleAddBots = (bot, id) => {    
     
     let foundBot = this.state.bots.find(bot => bot.id === id)
-    
-    let usersBots = [...this.state.usersBots, foundBot];
 
-    this.setState({ 
-      usersBots
-     });
+    let listBots = this.state.usersBots.map(bot => bot.name);
+
+    if(!listBots.includes(foundBot.name)) {
+      let usersBots = [...this.state.usersBots, foundBot];
+      this.setState({ 
+        usersBots
+       });
+    }
+
+
+    
 
   }
 
@@ -48,7 +54,6 @@ class BotsPage extends React.Component {
   }
 
   render() {
-    console.log(this.state.removeBot)
     return (
       <div>
         <YourBotArmy 
