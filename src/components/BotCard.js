@@ -1,9 +1,14 @@
 import React from "react";
+import BotSpecs from '../components/BotSpecs'
+
 
 const BotCard = props => {
   const { bot } = props;
 
   let botType;
+
+
+ 
 
   switch (bot.bot_class) {
     case "Assault":
@@ -24,7 +29,7 @@ const BotCard = props => {
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => props.handleClick(props.bot)}
+        onClick={()=>props.handleClick(bot)}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
