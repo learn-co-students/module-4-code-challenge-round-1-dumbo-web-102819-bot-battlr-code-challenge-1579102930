@@ -1,4 +1,6 @@
 import React from "react";
+import BotCollection from '../containers/BotCollection'
+import YourBotArmy from "../containers/YourBotArmy";
 
 const BotCard = props => {
   const { bot } = props;
@@ -18,13 +20,20 @@ const BotCard = props => {
     default:
       botType = <div />;
   }
-
+  // const removeFromAll = this.props.allBots.splice( allBots.indexOf(bot), 1 )
+  // const addToArmy = this.props.yourBots.push(bot) 
+  console.log(this.props)
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => console.log("add code to connect event listener")}
+        onClick={() => {
+          // console.log(this.props)
+          // HAD TROUBLE GETTING THE PROPS FROM BOTCOLLECTION PASSED
+        removeFromAll()
+        addToArmy()
+        }}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
