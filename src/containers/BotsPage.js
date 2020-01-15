@@ -4,7 +4,8 @@ import YourBotArmy from "./YourBotArmy";
 
 class BotsPage extends React.Component {
   state = {
-    bots: []
+    bots: [],
+    yourArmy: []
   }
 
   componentDidMount(){
@@ -13,11 +14,20 @@ class BotsPage extends React.Component {
     .then(botsArr => this.setState({ bots: botsArr}))
   }
 
+  handleClick=(BotObj) => {
+    
+    this.setState({
+      yourArmy: [...this.state.yourArmy, BotObj]
+    })
+  }
+
+
   render() {
+    
     return (
       <div>
-        <YourBotArmy/>
-        <BotCollection bots={this.state.bots}/>
+        <YourBotArmy bots={this.state.yourArmy}/>
+        <BotCollection bots={this.state.bots} handleClick={this.handleClick}/>
       </div>
     );
   }
