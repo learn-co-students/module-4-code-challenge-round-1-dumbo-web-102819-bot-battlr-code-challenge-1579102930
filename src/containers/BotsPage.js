@@ -25,7 +25,7 @@ class BotsPage extends React.Component {
       return robot.id === bot.id
     })
 
-    console.log(filteredArmy)
+    console.log(bot.id)
 
     if (filteredArmy.includes(bot)) {
       this.setState({
@@ -48,12 +48,14 @@ class BotsPage extends React.Component {
     let the_robots= this.state.yourArmy.filter(robot => {
       return robot !== bot
     })
+
     this.setState({
       yourArmy: the_robots
     })
   }
 
   render() {
+    console.log(this.state.yourArmy)
     return (
       
       <div>
