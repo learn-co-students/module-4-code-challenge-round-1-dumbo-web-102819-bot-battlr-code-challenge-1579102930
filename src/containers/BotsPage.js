@@ -9,7 +9,6 @@ class BotsPage extends React.Component {
   state = {
     usersBots: [],
     bots: [],
-    removeBot: false,
     currBot: null
   }
 
@@ -26,9 +25,7 @@ class BotsPage extends React.Component {
     let usersBots = [...this.state.usersBots, foundBot];
 
     this.setState({ 
-      usersBots,
-      currBot: foundBot,
-      removeBot: true
+      usersBots
      });
 
   }
@@ -45,6 +42,11 @@ class BotsPage extends React.Component {
     this.setState({ currBot: null})
   }
 
+  getCurrBot = (bot, id) => {
+    let foundBot = this.state.bots.find(bot => bot.id === id)
+    this.setState({currBot: foundBot})
+  }
+
   render() {
     console.log(this.state.removeBot)
     return (
@@ -53,10 +55,9 @@ class BotsPage extends React.Component {
           handleClick={this.handleRemoveBots}
           bots={this.state.usersBots}
         />
-        {this.state.currBot ? <BotSpecs changeCurrBot={this.changeCurrBot} handleClick={this.handleAddBots} bot={this.state.currBot} /> : null}
+        {this.state.currBot ? <BotSpecs changeCurrBot={this.changeCurrBot} handleAddBots={this.handleAddBots} bot={this.state.currBot} /> : null}
         <BotCollection 
-          removeBot={this.state.removeBot}
-          handleClick={this.handleAddBots}
+          handleClick={this.getCurrBot}
           bots={this.state.bots}
         />
       </div>
