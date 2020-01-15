@@ -8,8 +8,8 @@ class YourBotArmy extends React.Component {
     let myBots = this.props.bots.filter((bot) => {
       return bot.enlisted
     })
-    return myBots.map((bot) => {
-      return <BotCard bot={bot} setBotToShow={this.props.setBotToShow}/>
+    return myBots.map((bot, i) => {
+      return <BotCard key={i} bot={bot} setBotToShow={this.props.setBotToShow}/>
     })
   }
 

@@ -3,6 +3,7 @@ import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
 import BotSpecs from '../components/BotSpecs'
+import Filter from '../components/Filter'
 
 class BotsPage extends React.Component {
   //start here with your code for step one
@@ -10,6 +11,13 @@ class BotsPage extends React.Component {
   state = {
     bots: [],
     botToShow: null,
+    filterBy: null
+  }
+
+  changeFilterValue = (value) => {
+    this.setState({
+      filterBy: value
+    })
   }
 
   toggleEnlisted = (bot) => {
@@ -41,14 +49,30 @@ class BotsPage extends React.Component {
     })
   }
 
+  getFilteredBots = () => {
+    if(this.state.filterBy){
+      return this.state.bots.filter((bot) => {
+        return bot.bot_class.toLowerCase() == this.state.filterBy
+      })
+    } else {
+      return this.state.bots
+    }
+  }
+
   getBotComponent = () => {
     if(this.state.botToShow){
       return <BotSpecs bot={this.state.botToShow}
                        toggleEnlisted={this.toggleEnlisted}
                        removeBotToShow={this.removeBotToShow}/>
     } else {
-      return <BotCollection bots={this.state.bots}
+      let filteredBots = this.getFilteredBots()
+      return (
+        <div>
+        <Filter changeFilterValue={this.changeFilterValue} filterBy={this.state.filterBy}/>
+        <BotCollection bots={filteredBots}
                             setBotToShow={this.setBotToShow}/>
+        </div>
+      )
     }
   }
 
