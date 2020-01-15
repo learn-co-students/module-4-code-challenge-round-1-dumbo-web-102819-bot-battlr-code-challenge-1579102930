@@ -10,8 +10,8 @@ class BotsPage extends React.Component {
     bots: [],
     army: [],
     botspec: false,
-    selected: {},
-    filtering: false
+    selected: {}
+    // filtering: false
   }
 
   
@@ -87,20 +87,22 @@ class BotsPage extends React.Component {
       this.setState({
         bots: newBotsArray
       })
-    } else if (event.target.id ==='Assault') {
-      console.log("assault")
-      let newBotsArray = [...this.state.bots]
-      newBotsArray.filter((element) => {
-        console.log(element.bot_class)
-        return (element.bot_class === 'Assault')
-      })
-      this.setState({
-        bots: newBotsArray, 
-        filtering: true
-      })
-    }
+    } 
+    // else if (event.target.id ==='Assault') {
+    //   console.log("assault")
+    //   let newBotsArray = [...this.state.bots]
+    //   newBotsArray.filter((element) => {
+    //     console.log(element.bot_class)
+    //     return (element.bot_class === 'Assault')
+    //   })
+    //   this.setState({
+    //     bots: newBotsArray, 
+    //     filtering: true
+    //   })
+    // }
 
   }
+
 
   render() {
     return (
