@@ -1,4 +1,5 @@
 import React from "react";
+// bolt_class is an attr of a bol
 
 const BotCard = props => {
   const { bot } = props;
