@@ -23,9 +23,10 @@ class BotsPage extends React.Component {
       botSpecObj: botObj
     })
   }
+
   addBotToArmy=(botObj) => {
     if(this.state.yourArmy.includes(botObj)){
-      alert('This bot is in your army already!')
+      alert(`${botObj.name} is already in your army !`)
     }else{
     this.setState({
       yourArmy: [...this.state.yourArmy, botObj]
@@ -53,7 +54,6 @@ class BotsPage extends React.Component {
 
   render() {
    
-    
     return (
       <div>
         <YourBotArmy bots={this.state.yourArmy} handleClick={this.removeBotFromArmy}/>
