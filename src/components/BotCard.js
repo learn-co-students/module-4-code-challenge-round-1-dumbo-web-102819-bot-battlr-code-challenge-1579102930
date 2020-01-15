@@ -23,8 +23,10 @@ const BotCard = props => {
   const handleClick = () => {
     // console.log("i clicked")
     if (props.addBotToArmy) {
-      props.addBotToArmy(bot)
+      props.showBotSpec(bot)
+      // props.addBotToArmy(bot)
     } else if (props.removeBotFromArmy) {
+
       props.removeBotFromArmy(bot)
     }
   }
