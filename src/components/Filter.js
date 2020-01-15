@@ -12,9 +12,9 @@ class Filter extends Component {
 
     render() {
         return (
-            <form className="ui form">
-                <div className="field">
-                    <label>Filter</label>
+            <form className="ui form" style={{width: "6em", margin: "auto", marginBottom: "1em"}}>
+                <div className="field" style={{width: "6em"}}>
+                    <label style={{textAlign: "center"}}>Filter</label>
                     <select onChange={this.handleChange} className="ui fluid dropdown" value={this.props.filterBy ? this.props.filterBy : "none"}>
                         <option value="none">None</option>
                         <option value="assault">Assault</option>
@@ -22,7 +22,6 @@ class Filter extends Component {
                         <option value="support">Support</option>
                     </select>
                 </div>
-                <button className="ui button" type="submit">Submit</button>
             </form> 
         );
     }
