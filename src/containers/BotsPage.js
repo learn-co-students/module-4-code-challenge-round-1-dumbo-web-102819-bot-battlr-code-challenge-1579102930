@@ -2,12 +2,15 @@ import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
 import BotSpecs from '../components/BotSpecs'
+import Sorter from './Sorter'
 
 class BotsPage extends React.Component {
   
   state = {
     bots:[],
     army:[],
+    filteredBots:[],
+    isSearching:false,
     selectedBot:null
   }
 
@@ -34,6 +37,8 @@ class BotsPage extends React.Component {
       this.setState({
         bots:newBots,
         army:newArmy,
+        isSearching:false,
+        filteredBots:[],
         selectedBot:null
       },() => {
         console.log(this.state.bots,this.state.army);
@@ -45,6 +50,8 @@ class BotsPage extends React.Component {
       this.setState({
         bots:newBots,
         army:newArmy,
+        isSearching:false,
+        filteredBots:[],
         selectedBot:null
       }, () => {
         console.log(this.state.army,this.state.bots)
@@ -64,11 +71,28 @@ class BotsPage extends React.Component {
     })
   }
 
+  handleSearch = (input) => {
+    if(input !== "") {
+    let searchedBots = [...this.state.bots].filter(bot => bot.name.includes(input))
+    this.setState({
+      filteredBots:searchedBots,
+      isSearching:true
+    })
+    console.log(searchedBots);
+    } else {
+      this.setState({
+        filteredBots:[],
+        isSearching:false
+      })
+    }
+  }
+
   render() {
     return (
       <div>
         <YourBotArmy army={this.state.army} discharge={this.enlistDischarge} />
-        {this.state.selectedBot ? <BotSpecs bot={this.state.selectedBot} goBack={this.goBack} enlist={this.enlistDischarge} /> : <BotCollection bots={this.state.bots} selectBot={this.selectBot} /> }
+        <Sorter handleSearch={this.handleSearch} />
+        {this.state.selectedBot ? <BotSpecs bot={this.state.selectedBot} goBack={this.goBack} enlist={this.enlistDischarge} /> : <BotCollection bots={this.state.isSearching ? this.state.filteredBots : this.state.bots} selectBot={this.selectBot} /> }
       </div>
     );
   }
