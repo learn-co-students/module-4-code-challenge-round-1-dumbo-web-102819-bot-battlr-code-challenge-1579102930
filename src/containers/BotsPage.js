@@ -9,7 +9,7 @@ class BotsPage extends React.Component {
 
   state = {
     bots: [],
-    botToShow: null
+    botToShow: null,
   }
 
   toggleEnlisted = (bot) => {
@@ -48,7 +48,6 @@ class BotsPage extends React.Component {
                        removeBotToShow={this.removeBotToShow}/>
     } else {
       return <BotCollection bots={this.state.bots}
-                            toggleEnlisted={this.toggleEnlisted}
                             setBotToShow={this.setBotToShow}/>
     }
   }
@@ -73,7 +72,6 @@ class BotsPage extends React.Component {
     return (
       <div>
         <YourBotArmy bots={this.state.bots}
-                     toggleEnlisted={this.toggleEnlisted}
                      setBotToShow={this.setBotToShow}/>
         {this.getBotComponent()}
       </div>

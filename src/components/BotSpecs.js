@@ -77,7 +77,7 @@ const BotSpecs = props => {
               className="ui button fluid"
               onClick={handleEnlist}
             >
-              Enlist
+              {props.bot.enlisted ? "Unenlist" : "Enlist"}
             </button>
           </div>
         </div>
