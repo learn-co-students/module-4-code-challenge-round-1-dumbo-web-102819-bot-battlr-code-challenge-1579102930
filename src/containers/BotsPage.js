@@ -43,11 +43,12 @@ class BotsPage extends React.Component {
   }
   
   // showOneBot = (bot) => {
-  //   if (this.state.currentBot.id === bot.id) {
-  //   <BotSpecs bot={bot} />
-  //   } else {
-  //     null
-  //   }
+  //   let filterBot = this.state.myBots.filter(removeBot => removeBot.id !== bot.id)
+  //   {this.filterBot() ? 
+	// 	this.props.currentBot.map(bot => <BotSpecs bot={bot} handleClick={this.props.handleClick}/>) 
+	// 	:
+	// 	this.state.bots.map(bot => 
+	// 	<BotCard key={bot.id} bot={bot} handleClick={this.props.handleClick}/>)}
   // }
   
   
