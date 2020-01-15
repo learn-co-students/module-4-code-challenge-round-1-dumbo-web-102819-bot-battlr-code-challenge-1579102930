@@ -1,12 +1,16 @@
 import React from "react";
 import BotCollection from './BotCollection';
 import YourBotArmy from './YourBotArmy';
+import BotSpecs from '../components/BotSpecs';
+
 
 class BotsPage extends React.Component {
  
   state= {
     robots: [],
-    yourArmy: []
+    yourArmy: [],
+    expandBot: false,
+    selectedBot: []
   }
 
   componentDidMount () {
@@ -21,20 +25,23 @@ class BotsPage extends React.Component {
 
   addToArmy= (bot) => {
 
-    const filteredArmy= this.state.yourArmy.filter(robot => {
-      return robot.id === bot.id
+    let theseRobots= this.state.yourArmy.filter(robot => {
+      return robot === bot
     })
 
-    console.log(bot.id)
+    let setOfRobotIds= theseRobots.map(robot => {
+      return robot.id
+    })
 
-    if (filteredArmy.includes(bot)) {
-      this.setState({
+    if (setOfRobotIds.includes(bot.id)) {
+      return this.setState({
         yourArmy: this.state.yourArmy
       })
     }
 
     else {
-    let robot= this.state.robots.filter(robot => {
+
+    let robot= this.state.robots.find(robot => {
       return robot.id ===bot.id
     })
 
@@ -53,14 +60,35 @@ class BotsPage extends React.Component {
       yourArmy: the_robots
     })
   }
+    
+    robotIsClicked= (bot) => {
+
+      if (this.state.expandBot) {
+        this.setState({
+          expandBot: !this.state.expandBot,
+          selectedBot: []
+        })
+      }
+
+      else {
+
+      this.setState({
+        expandBot: !this.state.expandBot,
+        selectedBot: bot
+      }); 
+    }
+  }
+
+	
 
   render() {
-    console.log(this.state.yourArmy)
     return (
       
       <div>
-        <YourBotArmy yourArmy={this.state.yourArmy} handleClick={this.removeFromArmy}/>
-       <BotCollection robots={this.state.robots} handleClick={this.addToArmy}/>
+        <YourBotArmy yourArmy={this.state.yourArmy} removeFromArmy={this.removeFromArmy}/>
+       
+       {this.state.expandBot ? <BotSpecs bot={this.state.selectedBot} handleClick={this.robotIsClicked} addToArmy={this.addToArmy}/> :
+  <BotCollection robots={this.state.robots} handleClick={this.robotIsClicked}/> }
       </div>
      
     );

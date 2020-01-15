@@ -25,7 +25,7 @@ const BotSpecs = props => {
         <div className="row">
           <div className="four wide column">
             <img
-              alt="oh no!"
+              alt={bot.name}
               className="ui medium circular image bordered"
               src={bot.avatar_url}
             />
@@ -61,7 +61,7 @@ const BotSpecs = props => {
             <button
               className="ui button fluid"
               onClick={() =>
-                props.renderingBots(bot)
+                props.handleClick(bot)
               }
             >
               Go Back
@@ -69,7 +69,7 @@ const BotSpecs = props => {
             <button
               className="ui button fluid"
               onClick={() =>
-                props.handleClick(bot)
+                props.addToArmy(bot)
               }
             >
               Enlist

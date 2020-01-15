@@ -27,7 +27,7 @@ const BotCard = props => {
         onClick={() => props.handleClick(bot)}
       >
         <div className="image">
-          <img alt="oh no!" src={bot.avatar_url} />
+          <img alt={bot.name} src={bot.avatar_url} />
         </div>
         <div className="content">
           <div className="header">
