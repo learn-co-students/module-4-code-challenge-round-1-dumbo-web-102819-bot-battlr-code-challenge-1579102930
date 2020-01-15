@@ -5,7 +5,7 @@ import uuid from 'uuid'
 class YourBotArmy extends React.Component {
   renderBot = () => {
     return this.props.bots.map((bot, index) => {
-      return <BotCard key={uuid()} bot={bot}/>
+      return <BotCard key={uuid()} bot={bot} handleClick={this.props.handleClick}/>
     })
   }
 
