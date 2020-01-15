@@ -15,10 +15,12 @@ class BotsPage extends React.Component {
   }
 
   handleClick=(BotObj) => {
-    
+    if(this.state.yourArmy.includes(BotObj)){
+      alert('This bot is in your army already!')
+    }else{
     this.setState({
       yourArmy: [...this.state.yourArmy, BotObj]
-    })
+    })}
   }
 
 
