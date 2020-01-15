@@ -7,7 +7,7 @@ class BotCollection extends React.Component {
   genBots = () => {
 	return this.props.bots.map((bot, i) => {
 		return <BotCard key={i} bot={bot} 
-						toggleEnlisted={this.props.toggleEnlisted}/>
+						toggleEnlisted={bot.enlisted ? ()=>{} : this.props.toggleEnlisted}/>
 	})
   }
 
