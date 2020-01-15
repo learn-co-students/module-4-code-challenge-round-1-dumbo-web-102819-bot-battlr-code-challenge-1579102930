@@ -5,7 +5,9 @@ import YourBotArmy from "./YourBotArmy";
 class BotsPage extends React.Component {
   state = {
     bots: [],
-    yourArmy: []
+    yourArmy: [],
+    botCardClicked: false,
+    botSpecObj: {}
   }
 
   componentDidMount(){
@@ -14,30 +16,48 @@ class BotsPage extends React.Component {
     .then(botsArr => this.setState({ bots: botsArr}))
   }
 
-  addBotToArmy=(BotObj) => {
-    if(this.state.yourArmy.includes(BotObj)){
+  handleClick=(botObj) => {
+
+    this.setState({
+      botCardClicked: true,
+      botSpecObj: botObj
+    })
+  }
+  addBotToArmy=(botObj) => {
+    if(this.state.yourArmy.includes(botObj)){
       alert('This bot is in your army already!')
     }else{
     this.setState({
-      yourArmy: [...this.state.yourArmy, BotObj]
+      yourArmy: [...this.state.yourArmy, botObj]
     })}
+
+    this.setState({
+      botCardClicked: false
+    })
   }
   
-  removeBotFromArmy=(BotObj) => {
+  removeBotFromArmy=(botObj) => {
     let newArry = [...this.state.yourArmy].filter((bot) => {
-      return bot.id !== BotObj.id
+      return bot.id !== botObj.id
     })
        this.setState({
          yourArmy: newArry
        })
   }
 
+  handleGoBack=() => {
+    this.setState({
+      botCardClicked: false
+    })
+  }
+
   render() {
+   
     
     return (
       <div>
         <YourBotArmy bots={this.state.yourArmy} handleClick={this.removeBotFromArmy}/>
-        <BotCollection bots={this.state.bots} handleClick={this.addBotToArmy}/>
+        <BotCollection handleGoBack={this.handleGoBack} bots={this.state.bots} handleClick={this.handleClick} botCardClicked={this.state.botCardClicked} specBot={this.state.botSpecObj} handleEnlist={this.addBotToArmy}/>
       </div>
     );
   }
