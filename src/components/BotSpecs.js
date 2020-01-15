@@ -3,6 +3,15 @@ import React from "react";
 const BotSpecs = props => {
   let { bot } = props;
 
+  const handleBack = () => {
+    props.removeBotToShow()
+  }
+
+  const handleEnlist = () => {
+    props.toggleEnlisted(props.bot)
+    props.removeBotToShow()
+  }
+
   let botType;
 
   switch (bot.bot_class) {
@@ -60,21 +69,15 @@ const BotSpecs = props => {
             </div>
             <button
               className="ui button fluid"
-              onClick={() =>
-                console.log('connect this to a function that shows all bots')
-              }
+              onClick={handleBack}
             >
               Go Back
             </button>
             <button
               className="ui button fluid"
-              onClick={() =>
-                console.log(
-                  "connect this to a function that adds this bot to your bot army list"
-                )
-              }
+              onClick={handleEnlist}
             >
-              Enlist
+              {props.bot.enlisted ? "Unenlist" : "Enlist"}
             </button>
           </div>
         </div>
