@@ -12,3 +12,13 @@
 .ui.grid {
   padding: 0px 20px;
 }
+
+
+button.filter {
+  margin: auto;
+  display: inline-block;
+}
+
+div.buttonContainer {
+  text-align: center;
+}
