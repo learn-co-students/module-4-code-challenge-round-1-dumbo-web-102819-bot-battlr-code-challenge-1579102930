@@ -9,10 +9,15 @@ class BotCollection extends React.Component {
 		return <BotCard 
 					bot={bot}
 					handleClick={this.props.addBot}
+					isClicked={this.props.isClicked}
+					armyArray={this.props.armyArray}
 			   />
 		})
 	}
 	
+
+	
+
 
   
 
