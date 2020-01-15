@@ -10,7 +10,8 @@ class BotsPage extends React.Component {
     bots: [],
     army: [],
     botspec: false,
-    selected: {}
+    selected: {},
+    filtering: false
   }
 
   
@@ -47,7 +48,9 @@ class BotsPage extends React.Component {
         army: [...this.state.army, bot],
         botspec: false
       })
-    } 
+    } else {
+      alert("I'm already in your army dude")
+    }
 
     // this.setState({
     //   army: [...this.state.army, bot]
@@ -64,12 +67,53 @@ class BotsPage extends React.Component {
       })
     })
   }
+  filter = (event) => {
+    // console.log(event.target.id)
+
+    if (event.target.id === 'sort') {
+      let newBotsArray = [...this.state.bots]
+      newBotsArray.sort(function(a, b) {
+        let nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        let nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0
+      })
+      // console.log(newBotsArray)
+      this.setState({
+        bots: newBotsArray
+      })
+    } else if (event.target.id ==='Assault') {
+      console.log("assault")
+      let newBotsArray = [...this.state.bots]
+      newBotsArray.filter((element) => {
+        console.log(element.bot_class)
+        return (element.bot_class === 'Assault')
+      })
+      this.setState({
+        bots: newBotsArray, 
+        filtering: true
+      })
+    }
+
+  }
 
   render() {
     return (
       <div>
         {/* put your components here */}
         <YourBotArmy  army={this.state.army} removeBotFromArmy={this.removeBotFromArmy} /> 
+        <div className="buttonContainer">
+          ::SORT METHODS:: <br></br>
+        <button className="filter" onClick={this.filter} id="sort">SKU#</button>:
+        {/* <button className="filter" onClick={this.filter} id="Assault"><i className="icon military" /></button> */}
+        </div> 
+        <br>
+        </br>
         {this.state.botspec? <BotSpecs addBotToArmy={this.addBotToArmy} hideBotSpec={this.hideBotSpec} bot={this.state.selected} /> : <BotCollection bots={this.state.bots} addBotToArmy={this.addBotToArmy} showBotSpec={this.showBotSpec} />}  
       </div>
     );
