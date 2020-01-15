@@ -23,7 +23,7 @@ class Filter extends Component {
                     </select>
                 </div>
                 <button className="ui button" type="submit">Submit</button>
-            </form>
+            </form> 
         );
     }
 }
