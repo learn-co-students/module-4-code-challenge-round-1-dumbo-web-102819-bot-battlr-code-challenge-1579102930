@@ -1,12 +1,14 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
   
   state = {
     bots:[],
-    army:[]
+    army:[],
+    selectedBot:null
   }
 
   componentDidMount() {
@@ -31,7 +33,8 @@ class BotsPage extends React.Component {
           newArmy = [...this.state.army].filter(bot => bot.id !== selectedbot.id)
       this.setState({
         bots:newBots,
-        army:newArmy
+        army:newArmy,
+        selectedBot:null
       },() => {
         console.log(this.state.bots,this.state.army);
       })
@@ -41,18 +44,31 @@ class BotsPage extends React.Component {
           
       this.setState({
         bots:newBots,
-        army:newArmy
+        army:newArmy,
+        selectedBot:null
       }, () => {
         console.log(this.state.army,this.state.bots)
       })
     }
   }
 
+  selectBot = (bot) => {
+    this.setState({
+      selectedBot:bot
+    })
+  }
+
+  goBack = () => {
+    this.setState({
+      selectedBot:null
+    })
+  }
+
   render() {
     return (
       <div>
         <YourBotArmy army={this.state.army} discharge={this.enlistDischarge} />
-        <BotCollection bots={this.state.bots} enlist={this.enlistDischarge} /> 
+        {this.state.selectedBot ? <BotSpecs bot={this.state.selectedBot} goBack={this.goBack} enlist={this.enlistDischarge} /> : <BotCollection bots={this.state.bots} selectBot={this.selectBot} /> }
       </div>
     );
   }
