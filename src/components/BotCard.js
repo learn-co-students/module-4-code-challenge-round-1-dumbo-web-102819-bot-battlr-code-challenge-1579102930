@@ -4,7 +4,7 @@ const BotCard = props => {
   const { bot } = props;
 
   const handleClick = () => {
-    props.toggleEnlisted(bot)
+    props.setBotToShow(bot)
   }
 
   let botType;

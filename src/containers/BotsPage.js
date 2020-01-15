@@ -2,12 +2,14 @@ import React from "react";
 
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
   //start here with your code for step one
 
   state = {
-    bots: []
+    bots: [],
+    botToShow: null
   }
 
   toggleEnlisted = (bot) => {
@@ -25,6 +27,30 @@ class BotsPage extends React.Component {
     this.setState({
       bots: newBots
     }, ()=>{console.log(this.state)})
+  }
+
+  setBotToShow = (bot) => {
+    this.setState({
+      botToShow:bot
+    })
+  }
+
+  removeBotToShow = () => {
+    this.setState({
+      botToShow: null
+    })
+  }
+
+  getBotComponent = () => {
+    if(this.state.botToShow){
+      return <BotSpecs bot={this.state.botToShow}
+                       toggleEnlisted={this.toggleEnlisted}
+                       removeBotToShow={this.removeBotToShow}/>
+    } else {
+      return <BotCollection bots={this.state.bots}
+                            toggleEnlisted={this.toggleEnlisted}
+                            setBotToShow={this.setBotToShow}/>
+    }
   }
 
   componentDidMount(){
@@ -47,9 +73,9 @@ class BotsPage extends React.Component {
     return (
       <div>
         <YourBotArmy bots={this.state.bots}
-                     toggleEnlisted={this.toggleEnlisted}/>
-        <BotCollection bots={this.state.bots}
-                       toggleEnlisted={this.toggleEnlisted}/>
+                     toggleEnlisted={this.toggleEnlisted}
+                     setBotToShow={this.setBotToShow}/>
+        {this.getBotComponent()}
       </div>
     );
   }
